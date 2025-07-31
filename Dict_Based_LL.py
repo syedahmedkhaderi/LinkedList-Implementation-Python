@@ -1,31 +1,33 @@
 class LinkedList:
-
+    # the below line is a constructor method that initializes LinkedList class.
+    # Initializes with a head node containing given 'value'
+    # LinkedList must be started only with a single value
     def __init__(self, value):
         self.head = {
-            'value' : value ,
-            'next' : None
+            'value' : value , # Store the initial value in the head node
+            'next' : None     # The 'next' reference starts as None (no next node)
         }
-        self.tail = self.head
-        self.length = 1
+        self.tail = self.head # Since there’s only one node at initialization, both head and tail point to it
+        self.length = 1       # The linked list has one item initially
         print("Hi, This is My Dictionary Based Linked List. Use Method 'help()' for listing all the methods")
 
     def append(self, data):
         new_node = {
             "value" : data ,
-            "next" : None
+            "next" : None     # New node always ends with 'next' as None
         }
-        self.tail['next'] = new_node
-        self.tail = new_node
-        self.length += 1
-        return self
+        self.tail['next'] = new_node  # Point current tail to the new node
+        self.tail = new_node          # Update tail to new node
+        self.length += 1              # Increment the length of the list
+        return self                   # Return the updated list (chainable)
 
     def prepend(self, data):
         new_node = {
             "value": data,
             "next": None
         }
-        new_node['next'] = self.head
-        self.head = new_node
+        new_node['next'] = self.head    # Point the new node to the current head
+        self.head = new_node            # Update the head to be the new node
         self.length += 1
         return self
 
@@ -34,42 +36,45 @@ class LinkedList:
             "value": value,
             "next": None
         }
+        if index == 0:
+            self.prepend(value)
+            return self.print_list()
 
         if index >= self.length:
             self.append(value)
             return self.print_list()
 
-        leader = self.get_index(index - 1)
-        next_leader = leader['next']
-        leader['next'] = new_node
-        new_node['next'] = next_leader
+        leader = self.get_index(index - 1)  # Get the node before the desired position
+        next_leader = leader['next']        # Store the next node to reconnect later
+        leader['next'] = new_node           # Link previous node to new node
+        new_node['next'] = next_leader      # Link new node to what was at target index
         self.length +=1
-        return self.print_list()
+        return self.print_list()            # Return updated node values
 
     def get_index(self, index):
         counter = 0
         current_node = self.head
         while counter != index :
-            current_node = current_node['next']
+            current_node = current_node['next'] # Move to the next node
             counter+=1
-        return current_node
+        return current_node                     # Return the node at requested index
 
     def __str__(self):
         return str(self.__dict__)
 
     def print_list(self):
-        arr = []
-        current_node = self.head
-        while (current_node['next'] != None):
+        arr = []                                # Array to collect values
+        current_node = self.head                # Start from head
+        while (current_node['next'] != None):   # Traverse until the last node
             arr.append(current_node['value'])
             current_node = current_node['next']
-        arr.append(self.tail['value'])
+        arr.append(self.tail['value'])          # Add the final node's value
         return arr
 
     def delete(self, index):
-        leader = self.get_index(index - 1)
-        deleting_node = leader['next']
-        leader['next'] = deleting_node['next']
+        leader = self.get_index(index - 1)      # Find the node right before the one we want to
+        deleting_node = leader['next']          # The node to remove
+        leader['next'] = deleting_node['next']  # Point the previous node to the next-next
         self.length -= 1
         return self.print_list()
 
@@ -86,7 +91,7 @@ class LinkedList:
         print("----------------------------------------------------\n")
 
 
-ll = LinkedList(10)
+ll = LinkedList(29)
 ll.help()
 print(ll.print_list())
 ll.append(1)
