@@ -105,3 +105,10 @@ ll.delete(2)
 print(ll.print_list())
 print(ll.insert(10,20))
 
+'''
+This is not the classic Linked List. Nodes in this are dictionaries instead of objects of Node Class. 
+Instead of relying on dot syntax of node attribute to access node class, we use dictionary access method here.
+Hence, Not very object oriented. So not recommended.
+But structure wise, methods wise and fundamentally it is a Linked List. 
+I will be building an object oriented linked list in next file in same directory.
+'''
