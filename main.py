@@ -91,7 +91,15 @@ class LinkedList:
         '''
 
     def reverse(self):
-        pass
+        prev, curr = None, self.head
+        self.tail = self.head
+        while curr:
+            nxt = curr.next
+            curr.next = prev
+            prev = curr
+            curr = nxt
+        self.head = prev
+
     def printl(self):
         arr = []
         temp = self.head
@@ -111,5 +119,21 @@ ll.delete(0)
 ll.delete(10)
 ll.delete(1)
 print(ll.printl())
+ll.reverse()
+ll.append(5)
+ll.prepend(6)
+print(ll.printl())
 
 
+
+
+'''
+Linear search for linked lists works the same as for arrays. 
+A list of unsorted values are traversed from the head node until the node with the specific value is found. Time complexity is O(n).
+
+Binary search is not possible for linked lists because the algorithm is based on jumping directly to different array elements, 
+and that is not possible with linked lists.
+
+Sorting algorithms have the same time complexities as for arrays, and these are explained earlier in this tutorial. 
+But remember, sorting algorithms that are based on directly accessing an array element based on an index, do not work on linked lists.
+'''
